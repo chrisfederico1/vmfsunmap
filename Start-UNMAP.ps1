@@ -49,6 +49,10 @@ BEGIN{
 	exit 
     }
 
+
+    # Add spaces
+    "";""
+
 # Verification of Host and Datastore
 write-host "INFO: Verifying Host"
 
@@ -83,7 +87,7 @@ PROCESS {
     $esxcli = Get-EsxCli -VMHost $EsxiHost
 
     # Start unmapping.
-    write-host "INFO: Unmapping $Datastore on $VMHost. This will take awhile depending on size of datastore." -ForegroundColor Green
+    write-host "INFO: Unmapping $Datastore on $VMHost. This may take awhile depending on size of datastore." -ForegroundColor Green
     $esxcli.storage.vmfs.unmap($null,$DataStoreName,$null)
 }
 
