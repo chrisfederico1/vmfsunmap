@@ -37,7 +37,7 @@ BEGIN{
     Clear-host
 
     # Add start-transact here
-    Start-Transaction -path .\vmfsunmaplogging.txt
+    Start-Transcript -path .\vmfsunmaplogging.txt
 
     # Give user information about which server and datastore they choose
     write-host "You selected host " $VMHost " with datastore " $Datastore -BackgroundColor Red
@@ -75,6 +75,7 @@ catch{
     Write-Output "An Error Occured: " "" $error[0] ""
 }
 
+}
 PROCESS {
 
     # Connect to Host
@@ -84,9 +85,6 @@ PROCESS {
     # Start unmapping.
     write-host "INFO: Unmapping $Datastore on $VMHost. This will take awhile depending on size of datastore." -ForegroundColor Green
     $esxcli.storage.vmfs.unmap($null,$DataStoreName,$null)
-    
-    
-
 }
 
 END {
