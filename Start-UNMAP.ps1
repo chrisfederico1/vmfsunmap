@@ -32,7 +32,12 @@ function Start-UNMAP{
     )
 
 Begin{
-    # Add start-transact here 
+    # Clear Screen
+    # Add start-transact here
+ Start-Transaction -path .\vmfsunmaplogging.txt
+write-host "You selected host " $VMHost " with datastore " $Datastore -BackgroundColor Red
+
+
 
 }
 
