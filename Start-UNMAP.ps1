@@ -19,6 +19,10 @@ function Start-UNMAP{
 	KEYWORDS: VMware, vSphere, ESXi, SCSI, VAAI, UNMAP
    
  #>
+
+
+ #Todo : Change to v2 Esxicli . Also there is still a timeout issue with Powercli at 30 minutes 
+ 
     
 # Parameters
     [CmdletBinding()]
