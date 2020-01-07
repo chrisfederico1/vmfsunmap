@@ -32,7 +32,7 @@ function Start-UNMAP{
        
     )
 
-Begin{
+BEGIN{
     # Clear Screen
     Clear-host
 
@@ -69,17 +69,27 @@ try {
 
     $DataStoreName = get-datastore $Datastore
 }
+
+catch{
+
+    Write-Output "An Error Occured: " "" $error[0] ""
 }
 
-Process {
+PROCESS {
 
+    # Connect to Host
+    write-host "INFO: Connecting to ESXi Host: $VMHost" -ForegroundColor Green
+    $esxcli = Get-EsxCli -VMHost $EsxiHost
 
-
-
+    # Start unmapping.
+    write-host "INFO: Unmapping $Datastore on $VMHost. This will take awhile depending on size of datastore." -ForegroundColor Green
+    $esxcli.storage.vmfs.unmap($null,$DataStoreName,$null)
+    
+    
 
 }
 
-End {
+END {
 
 
     # Stop Logging
