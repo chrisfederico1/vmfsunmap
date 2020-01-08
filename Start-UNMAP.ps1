@@ -88,15 +88,27 @@ PROCESS {
 
     # Connect to Host
     write-host "INFO: Connecting to ESXi Host: $VMHost" -ForegroundColor Green
-    $esxcli = Get-EsxCli -VMHost $EsxiHost
+    $esxcli = Get-EsxCli -VMHost $EsxiHost -V2
+
+    # Create Args
+    $arguments = $esxcli.storage.vmfs.unmap.CreateArgs()
+    $arguments.volumelabel = $DataStoreName
+    $arguments.reclaimunit = "256"
+
 
     # Start unmapping.
     write-host "INFO: Unmapping $Datastore on $VMHost. This may take awhile depending on size of datastore." -ForegroundColor Green
-    $esxcli.storage.vmfs.unmap($null,$DataStoreName,$null)
+    #$esxcli.storage.vmfs.unmap($null,$DataStoreName,$null)
+    try {
+        $esxcli.storage.vmfs.unmap.Invoke($arguments) 
+    }
+    catch{
+        Write-Output "A Error occured: " "" $error[0] ""
+    }
+
 }
 
 END {
-
 
     # Stop Logging
     Stop-Transcript
