@@ -110,7 +110,7 @@ PROCESS {
     }
 
     $stopwatch.Stop()
-    write-output "UNMAP duration: $($stopwatch.Elapsed.Minutes)"
+    write-output "INFO: UNMAP duration: $($stopwatch.Elapsed.Minutes)"
 
 }
 
