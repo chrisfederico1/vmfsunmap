@@ -99,6 +99,7 @@ PROCESS {
     # Start unmapping.
     write-host "INFO: Unmapping $Datastore on $VMHost. This may take awhile depending on size of datastore." -ForegroundColor Green
     
+    # Stopwatch code
     $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
     
     try {
@@ -110,7 +111,7 @@ PROCESS {
 
     $stopwatch.Stop()
     write-output "UNMAP duration: $($stopwatch.Elapsed.Minutes)"
-    
+
 }
 
 END {
