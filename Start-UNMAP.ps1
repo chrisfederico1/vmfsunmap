@@ -98,7 +98,9 @@ PROCESS {
 
     # Start unmapping.
     write-host "INFO: Unmapping $Datastore on $VMHost. This may take awhile depending on size of datastore." -ForegroundColor Green
-    #$esxcli.storage.vmfs.unmap($null,$DataStoreName,$null)
+    
+    $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+    
     try {
         $esxcli.storage.vmfs.unmap.Invoke($arguments) 
     }
@@ -106,6 +108,9 @@ PROCESS {
         Write-Output "A Error occured: " "" $error[0] ""
     }
 
+    $stopwatch.Stop()
+    write-output "UNMAP duration: $($stopwatch.Elapsed.Minutes)"
+    
 }
 
 END {
