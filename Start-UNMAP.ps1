@@ -41,7 +41,7 @@ BEGIN{
     Clear-host
 
     # Add start-transact here
-    Start-Transcript -path .\vmfsunmaplogging.txt
+    Start-Transcript -path .\vmfsunmaplogging.txt -Append
 
     # Give user information about which server and datastore they choose
     write-host "You selected host " $VMHost " with datastore " $Datastore -BackgroundColor Red
